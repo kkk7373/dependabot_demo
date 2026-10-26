@@ -1,6 +1,6 @@
 version: 2
 updates:
-  - package:-ecosystem: github-actions # github-acionsのエコシステム jsならnpmなど
+  - package-ecosystem: github-actions # GitHub Actionsのエコシステム。JSならnpmなど
     directory: /
     schedule:
       interval: daily
