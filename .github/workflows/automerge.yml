@@ -7,13 +7,13 @@ jobs:
     permissions:
       contents: write
       pull-request: write
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      steps:
-        - uses: actions/checkout/v4
-        - id: meta #　メタデータ取得　dependabotが起動したワークフローではこのアクションを利用することでメタデータの取得が可能。
-          uses: dependabot/fetch-metadata@v2
-        - if: ${{ steps.meta.outputs.update-type == 'version-update:semver-patch' }} # バージョンアップがパッチ対応のもののみオートマージ
-          run: |
-            gh pr review "{GITHUB_HEAD_REF}" --approve
-            gh pr merge "{GITHUB_HEAD_REF}" --merge --auto # 全ワークフローの完了を待ってからマージ
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout/v4
+      - id: meta #　メタデータ取得　dependabotが起動したワークフローではこのアクションを利用することでメタデータの取得が可能。
+        uses: dependabot/fetch-metadata@v2
+      - if: ${{ steps.meta.outputs.update-type == 'version-update:semver-patch' }} # バージョンアップがパッチ対応のもののみオートマージ
+        run: |
+          gh pr review "{GITHUB_HEAD_REF}" --approve
+          gh pr merge "{GITHUB_HEAD_REF}" --merge --auto # 全ワークフローの完了を待ってからマージ
