@@ -10,7 +10,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout/v4
+      - uses: actions/checkout@v4
       - id: meta #　メタデータ取得　dependabotが起動したワークフローではこのアクションを利用することでメタデータの取得が可能。
         uses: dependabot/fetch-metadata@v2
       - if: ${{ steps.meta.outputs.update-type == 'version-update:semver-patch' }} # バージョンアップがパッチ対応のもののみオートマージ
